@@ -13,7 +13,7 @@ void scan_callback(const sensor_msgs::LaserScan::ConstPtr& msg){
 	
 	int num_readings = msg->ranges.size();
 	
-	//set last 10 readings to nan
+	//set last K readings to nan
 	//in simulation, the reeadings from the end of the list correspond to the readings on the left side 
 	for (int i = num_readings - NUM_FALSE_READINGS; i < num_readings; i++){
 		filtered.ranges[i] = NAN;
@@ -29,11 +29,11 @@ int main(int argc, char **argv)
 	
 	//get the input topic
 	std::string input_topic;
-	n.param<std::string>("scan_topic_in", input_topic, "/cfd");
+	n.param<std::string>("scan_topic_in", input_topic, "/scan_raw");
 	
 	//get the output topic
 	std::string output_topic;
-	n.param<std::string>("scan_topic_out", output_topic, "/dfdfsda");
+	n.param<std::string>("scan_topic_out", output_topic, "/scan");
 
 	//subscriber to unfiltered laser scan
 	ros::Subscriber sub = n.subscribe(input_topic, 1, scan_callback);
