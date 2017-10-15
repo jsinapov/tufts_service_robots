@@ -1,0 +1,9 @@
+<launch>
+ 
+  <!-- filter to set the leftmost k readings to nan as they are currently garbage on all 4 robots -->
+  <node pkg="tbot2_filters" type="turtlebot_laser_filter" name="turtlebot_laser_filter">
+    <param name="scan_topic_in" value="/scan_raw" />
+    <param name="scan_topic_out" value="/scan" />
+  </node>
+  
+</launch>
