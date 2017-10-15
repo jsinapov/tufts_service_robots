@@ -1,1 +1,1 @@
-# tufts_service_robots
+Repository containing packages for the Tufts Service Robotics project
