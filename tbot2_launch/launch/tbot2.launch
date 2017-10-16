@@ -7,7 +7,7 @@
 
 
 	<!-- launch 3D sensor -->
-	<include file="$(find turtlebot_bringup)/launch/3dsensor.launch">
+	<include file="$(find tbot2_launch)/launch/3dsensor.launch">
 		<!-- remap scan to scan_raw so that it can be filtered -->
 		<remap from="scan" to="scan_raw"/>
 	</include>
