@@ -92,6 +92,7 @@ int main(int argc, char **argv)
 		//say something
 		if (c == 1){
 			sc.say("Hello!");
+			ROS_INFO("speaking...");
 		}
 		
 		//sleep for a bit
