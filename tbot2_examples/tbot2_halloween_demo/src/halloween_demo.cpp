@@ -71,8 +71,8 @@ int main(int argc, char **argv)
 	
 	double home_location[3] = {5.65,13.8,0.0};
 	
-	int num_locations = 4;
-	double locations[4][3] = { {5.65,13.8,0.0},{21.7,13.7,0.0},{1.0,13.6,0.0},{1.0,13.6,0.0} };
+	int num_locations = 5;
+	double locations[5][3] = { {21.7,13.7,0.0},{21.8,5.9,0.0},{-0.329,6.21,0.0},{1.0,13.6,0.0},{5.65,13.8,0.0} };
 
 	
 	actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> ac("move_base",true);
