@@ -96,7 +96,7 @@ int main(int argc, char **argv)
 		}
 		
 		//sleep for a bit
-		sleepok(30,n);
+		//sleepok(30,n);
 		
 		//increment location 
 		c++;
