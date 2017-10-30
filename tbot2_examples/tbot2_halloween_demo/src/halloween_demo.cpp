@@ -9,6 +9,7 @@
 
 
 #include <sound_play/sound_play.h>
+#include <sound_play/SoundRequest.h>
 
 #include <vector>
 #include <iostream>
@@ -57,6 +58,9 @@ int main(int argc, char **argv)
 	ros::init(argc, argv, "move_base_client");
 	ros::NodeHandle n;
 	
+	//publisher for sound
+	ros::Publisher sound_pub = n.advertise<sound_play::SoundRequest>("/robotsound", 1);
+	
 	//sound client
 	sound_play::SoundClient sc;
 	sleepok(1,n);
@@ -82,6 +86,14 @@ int main(int argc, char **argv)
 
 	
 	int c = 0;  
+	
+	sound_play::SoundRequest S;
+	
+	S.sound = -3;
+	S.command = 1;
+	S.arg = "Demo starting!";
+	sound_pub.publish(S);
+
 	  
 	while (ros::ok()) {
 		
@@ -89,8 +101,14 @@ int main(int argc, char **argv)
 		move_turtle_bot(locations[c][0],locations[c][1],locations[c][2]);
 		
 		//say something
-		sc.say("Hello!");
+		//sc.say("Hello!");
 		ROS_INFO("speaking then sleeping..");
+		
+		
+		S.sound = -3;
+		S.command = 1;
+		S.arg = "Hello";
+		sound_pub.publish(S);
 
 		
 		//sleep for a bit
