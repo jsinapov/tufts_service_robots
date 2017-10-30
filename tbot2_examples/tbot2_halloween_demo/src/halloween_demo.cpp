@@ -52,7 +52,6 @@ int move_turtle_bot (double x, double y, double yaw)
   return 0;
 }
 
-
 int main(int argc, char **argv)
 {
 	ros::init(argc, argv, "move_base_client");
@@ -90,13 +89,12 @@ int main(int argc, char **argv)
 		move_turtle_bot(locations[c][0],locations[c][1],locations[c][2]);
 		
 		//say something
-		if (c == 1){
-			sc.say("Hello!");
-			ROS_INFO("speaking...");
-		}
+		sc.say("Hello!");
+		ROS_INFO("speaking then sleeping..");
+
 		
 		//sleep for a bit
-		//sleepok(30,n);
+		sleepok(10,n);
 		
 		//increment location 
 		c++;
