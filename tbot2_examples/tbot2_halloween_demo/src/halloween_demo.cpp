@@ -53,6 +53,23 @@ int move_turtle_bot (double x, double y, double yaw)
   return 0;
 }
 
+void sayRandomPhrase(ros::Publisher sound_pub){
+	sound_play::SoundRequest S;
+	
+	S.sound = -3;
+	S.command = 1;
+	
+	int num_messages = 7;
+	
+	int m = rand() % num_messages;
+	
+	std::string messages[num_messages] = {"Happy Halloween!", "Boooo!","I am a scaary robot!","Have some candy!","Trick or Treat!","My costume fell off.","Have as much candy as you want, but leave some for others!"};
+	
+	S.arg = messages[m];
+	
+	sound_pub.publish(S);
+}
+
 int main(int argc, char **argv)
 {
 	ros::init(argc, argv, "move_base_client");
@@ -61,11 +78,11 @@ int main(int argc, char **argv)
 	//publisher for sound
 	ros::Publisher sound_pub = n.advertise<sound_play::SoundRequest>("/robotsound", 1);
 	
-	//sound client
-	sound_play::SoundClient sc;
-	sleepok(1,n);
-	//initialize locations
 	
+	//sleep for a bit to make sure the pub will work
+	sleepok(2,n);
+	
+
 	//the order is:
 	// 0: right outside lab
 	// 1: right outside collaborative lounge
@@ -76,6 +93,8 @@ int main(int argc, char **argv)
 	
 	int num_locations = 5;
 	double locations[5][3] = { {21.7,13.7,0.0},{21.8,5.9,0.0},{-0.329,6.21,0.0},{1.0,13.6,0.0},{5.65,13.8,0.0} };
+	
+	
 
 	
 	actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> ac("move_base",true);
@@ -83,18 +102,9 @@ int main(int argc, char **argv)
 	move_base_msgs::MoveBaseGoal goal;
   
 	double x1,y1,x2,y2,x3,y3,x4,y4 = 0;
-
 	
 	int c = 0;  
 	
-	sound_play::SoundRequest S;
-	
-	S.sound = -3;
-	S.command = 1;
-	S.arg = "Demo starting!";
-	sound_pub.publish(S);
-
-	  
 	while (ros::ok()) {
 		
 		//move to next location
@@ -105,13 +115,11 @@ int main(int argc, char **argv)
 		ROS_INFO("speaking then sleeping..");
 		
 		
-		S.sound = -3;
-		S.command = 1;
-		S.arg = "Hello";
-		sound_pub.publish(S);
-
 		
-		//sleep for a bit
+		for (int p = 0; p < 3; p ++){
+			sayRandomPhrase(sound_pub);
+			sleepok(4,n);
+		}
 		sleepok(10,n);
 		
 		//increment location 
