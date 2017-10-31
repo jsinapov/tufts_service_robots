@@ -14,6 +14,8 @@
 #include <vector>
 #include <iostream>
 
+#define PI 3.14159265359
+
 
 void sleepok(int t, ros::NodeHandle &nh)
 {
@@ -59,11 +61,11 @@ void sayRandomPhrase(ros::Publisher sound_pub){
 	S.sound = -3;
 	S.command = 1;
 	
-	int num_messages = 7;
+	int num_messages = 9;
 	
 	int m = rand() % num_messages;
 	
-	std::string messages[num_messages] = {"Happy Halloween!", "Boooo!","I am a scaary robot!","Have some candy!","Trick or Treat!","My costume fell off.","Have as much candy as you want, but leave some for others!"};
+	std::string messages[num_messages] = {"Happy Halloween!", "Boooo!","I am a scaary robot!","Have some candy!","Trick or Treat!","I am a robot for Halloween, what are you?","Have as much candy as you want, but leave some for others!","I am afraid of ghosts.","I am the candy man"};
 	
 	S.arg = messages[m];
 	
@@ -91,8 +93,8 @@ int main(int argc, char **argv)
 	
 	double home_location[3] = {5.65,13.8,0.0};
 	
-	int num_locations = 5;
-	double locations[5][3] = { {21.7,13.7,0.0},{21.8,5.9,0.0},{-0.329,6.21,0.0},{1.0,13.6,0.0},{5.65,13.8,0.0} };
+	int num_locations = 7;
+	double locations[7][3] = { {21.7,13.7,0.0},{21.8,5.9,0.0},{-0.329,6.21,0.0},{1.0,13.6,0.0},{5.65,13.8,0.0},{7.5,9.8,0.0},{21.3,19.5,0.0} };
 	
 	
 
@@ -119,6 +121,7 @@ int main(int argc, char **argv)
 		for (int p = 0; p < 3; p ++){
 			sayRandomPhrase(sound_pub);
 			sleepok(4,n);
+			move_turtle_bot(locations[c][0],locations[c][1],locations[c][2]+(p+1)*PI/2);
 		}
 		sleepok(10,n);
 		
