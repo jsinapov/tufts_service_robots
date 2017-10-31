@@ -65,7 +65,7 @@ void sayRandomPhrase(ros::Publisher sound_pub){
 	
 	int m = rand() % num_messages;
 	
-	std::string messages[num_messages] = {"Happy Halloween!", "Boooo!","I am a scaary robot!","Have some candy!","Trick or Treat!","I am a robot for Halloween, what are you?","Have as much candy as you want, but leave some for others!","I am afraid of ghosts.","I am the candy man"};
+	std::string messages[9] = {"Happy Halloween!", "Boooo!","I am a scaary robot!","Have some candy!","Trick or Treat!","I am a robot for Halloween, what are you?","Have as much candy as you want, but leave some for others!","I am afraid of ghosts.","I am the candy man"};
 	
 	S.arg = messages[m];
 	
