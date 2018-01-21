@@ -2,7 +2,7 @@
   <arg name="3d_sensor" default="$(env TURTLEBOT_3D_SENSOR)"/>
 
   <!-- Map server -->
-  <arg name="map_file" default="$(find tufts_halligan)/maps/real/2/2.yaml"/>
+  <arg name="map_file" default="$(find tufts_halligan)/maps/real/1/1.yaml"/>
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
 
   <!-- AMCL -->

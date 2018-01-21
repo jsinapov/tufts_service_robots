@@ -82,8 +82,6 @@ int main(int argc, char **argv)
     std::cout<<"\n enter map y4:";
     std::cin>>y4;
     
-    
-    
     while(1)
 {
 		move_turtle_bot(x1,y1,30); // 30 is the sleep time
