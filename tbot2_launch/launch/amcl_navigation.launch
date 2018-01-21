@@ -21,9 +21,7 @@
   <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml">
     <arg name="custom_param_file" value="$(arg custom_param_file)"/>
   </include>
-  
-  jsinapov@jsinapov-XPS-15-9560:~/catkin_ws$ roslaunch turtlebot_rviz_launchers view_navigation.launch 
-
+ 
   
   <!-- rviz for visualization -->
   <include file="$(find turtlebot_rviz_launchers)/launch/view_navigation.launch">
