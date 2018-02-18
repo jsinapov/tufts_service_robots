@@ -1,19 +1,19 @@
 #!/usr/bin/env python
 
-""" Python unittest script for bwi_logging/directory module.
+""" Python unittest script for tbot2_logging/directory module.
 
 Does not require a ROS environment.
 """
 # enable some python3 compatibility options:
 from __future__ import absolute_import, print_function
 
-PKG='bwi_logging'
+PKG='tbot2_logging'
 import os
 import stat
 import unittest
 
 # module under test:
-from bwi_logging.directory import *
+from tbot2_logging.directory import *
 
 
 def delete_file(filename):
@@ -33,7 +33,7 @@ class TestLoggingDirectory(unittest.TestCase):
         """ Test with neither parameter provided. """
         home = os.environ['HOME']
         ld = LoggingDirectory(None)
-        d = home + '/.ros/bwi/bwi_logging'
+        d = home + '/.ros/tbot2/tbot2_logging'
         self.assertEqual(ld.pwd(), d)
         ld.chdir()
         self.assertEqual(os.getcwd(), d)
@@ -41,7 +41,7 @@ class TestLoggingDirectory(unittest.TestCase):
     def test_explicit_path_name(self):
         """ Test with explicit path name parameter. """
         um = os.umask(0o022)            # start by suppressing group write
-        parent = '/tmp/bwi_logging'
+        parent = '/tmp/tbot2_logging'
         os.system('rm -rf ' + parent)
 
         # make sure at least two directories are created

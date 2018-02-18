@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(bwi_logging)
+project(tbot2_logging)
 
 ## Find catkin macros and libraries
 find_package(catkin REQUIRED COMPONENTS
