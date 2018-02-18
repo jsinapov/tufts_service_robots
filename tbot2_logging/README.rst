@@ -6,6 +6,12 @@ collecting, analysing and uploading log data when running Turtlebots.
 
 This package has been repurposed from the `bwi_logging`_ package. 
 
+Installation
+============
+You might need to give 'nodes/record' execution permissions for this 
+package to run otherwise you might get errors.
+
+
 ROS interface
 =============
 

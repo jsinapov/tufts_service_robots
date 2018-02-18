@@ -88,19 +88,22 @@ def main(argv=None):
 
     rospy.loginfo('rosbag returned status: ' + str(status))
 
-    if status == 0 and prefix == DEFAULT_PREFIX:
 
-        rospy.loginfo('start uploading bags')
+    # No server yet for Turtlebots
+    # if status == 0 and prefix == DEFAULT_PREFIX:
 
-        # In the background, begin uploading the newly-written bag to
-        # the BWI server.  The setsid isolates the uploading scripts
-        # from ROS shutdown signals.  The -w120 waits two minutes
-        # before starting to upload.
-        upload_cmd = ['/usr/bin/setsid', '/usr/local/bin/tbot2',
-                      'bags', '-w120', '-d', logdir.pwd(), prefix, '&']
-        cmd_str = ' '.join(x for x in upload_cmd)
-        print('running command: ' + cmd_str)
-        os.system(cmd_str)
+    #     rospy.loginfo('start uploading bags')
+
+    #     # In the background, begin uploading the newly-written bag to
+    #     # the BWI server.  The setsid isolates the uploading scripts
+    #     # from ROS shutdown signals.  The -w120 waits two minutes
+    #     # before starting to upload.
+    #     upload_cmd = ['/usr/bin/setsid', '/usr/local/bin/tbot2',
+    #                   'bags', '-w120', '-d', logdir.pwd(), prefix, '&']
+    #     cmd_str = ' '.join(x for x in upload_cmd)
+    #     print('running command: ' + cmd_str)
+    #     os.system(cmd_str)
+
 
     return status
 
