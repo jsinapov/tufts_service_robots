@@ -60,10 +60,10 @@ class LoggingDirectory(object):
             home = os.path.expanduser('~')
             if home[0] != '~':          # expansion successful?
                 try_dirs.append(os.path.join(home, '.ros',
-                                             'bwi', 'bwi_logging'))
+                                             'tbot2', 'tbot2_logging'))
 
-        # /tmp/bwi/bwi_logging is the last resort if nothing else works
-        try_dirs.append(os.path.join('/tmp', 'bwi', 'bwi_logging'))
+        # /tmp/tbot2/tbot2_logging is the last resort if nothing else works
+        try_dirs.append(os.path.join('/tmp', 'tbot2', 'tbot2_logging'))
 
         for d in try_dirs:
             if os.access(d, os.W_OK):       # is it writable?

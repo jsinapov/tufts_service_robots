@@ -9,14 +9,14 @@
   <node name="drop_odom" pkg="topic_tools" type="drop"
         args="odom 99 100 odom_1hz"/>
 
-  <node name="record" pkg="bwi_logging" type="record">
+  <node name="record" pkg="tbot2_logging" type="record">
     <param name="topics"    value="$(arg topics)"    />
     <param name="directory" value="$(arg directory)" />
-    <param name="prefix"    value="bwi"              />
+    <param name="prefix"    value="tbot2"              />
   </node>
 
   <group if="$(arg extra_topics)">
-    <node name="record_extras" pkg="bwi_logging" type="record">
+    <node name="record_extras" pkg="tbot2_logging" type="record">
       <param name="topics"      value="$(arg extra_topics)" />
       <param name="directory"   value="$(arg directory)"    />
       <param name="prefix"      value="$(arg extra_prefix)" />

@@ -1,8 +1,10 @@
 Overview
 ========
 
-The `bwi_logging`_ ROS_ package provides nodes and scripts for
-collecting, analysing and uploading log data when running BWI robots.
+The 'tbot2_logging' package provides nodes and scripts for
+collecting, analysing and uploading log data when running Turtlebots.
+
+This package has been repurposed from the `bwi_logging`_ package. 
 
 ROS interface
 =============
@@ -27,18 +29,18 @@ All topics passed as command arguments will be subscribed by the
 Parameters
 ''''''''''
 
-``~directory`` (string, default: ``~/.ros/bwi/bwi_logging``)
+``~directory`` (string, default: ``~/.ros/tbot2/tbot2_logging``)
     An explicit directory for saving ROS topic bag files.
 
 If the ``directory`` is not accessible, bags are saved in
-``/tmp/bwi/bwi_logging``, instead.
+``/tmp/tbot2/tbot2_logging``, instead.
 
 Usage
 '''''
 
 ::
 
-    rosrun bwi_logging record topic1 [ topic2 ... ]
+    rosrun tbot2_logging record topic1 [ topic2 ... ]
 
 Where each ``topic`` is the name of a ROS topic to record.
 
@@ -52,7 +54,7 @@ parameters.
 Arguments
 '''''''''
 
-``directory`` (string, default: ``~/.ros/bwi/bwi_logging``)
+``directory`` (string, default: ``~/.ros/tbot2/tbot2_logging``)
     An explicit directory for saving ROS topic bag files.
 
 ``topics`` (string, default: ``odom amcl_pose /diagnostics``)
@@ -63,15 +65,15 @@ Usage
 
 To record the usual topics in the usual place::
 
-    roslaunch bwi_logging record
+    roslaunch tbot2_logging record
 
 To record different topic names::
 
-    roslaunch bwi_logging record topics:='filtered_odom /diagnostics /tf'
+    roslaunch tbot2_logging record topics:='filtered_odom /diagnostics /tf'
 
 To write the bag file in a different place::
 
-    roslaunch bwi_logging record directory:="~bwilab/.ros/bwi/bwi_logging"
+    roslaunch tbot2_logging record directory:="~/.ros/tbot2/tbot2_logging"
 
 
 .. _`bwi_logging`: http://wiki.ros.org/bwi_logging

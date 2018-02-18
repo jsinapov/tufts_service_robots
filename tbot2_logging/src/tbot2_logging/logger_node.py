@@ -35,8 +35,8 @@
 """.. module:: logger_node
 
 This Python script runs `rosbag record` on a list of ROS topics,
-saving the results in an appropriate directory for use with the BWI
-robots.
+saving the results in an appropriate directory for use with the
+Turtlebot robots.
 """
 # enable some python3 compatibility options:
 from __future__ import absolute_import, print_function
@@ -48,7 +48,7 @@ import sys
 
 from .directory import LoggingDirectory
 
-DEFAULT_PREFIX = 'bwi'
+DEFAULT_PREFIX = 'tbot2'
 
 
 def main(argv=None):
@@ -61,9 +61,9 @@ def main(argv=None):
     topics = rospy.get_param('~topics', None)
     if topics is None or topics == "":
         print('error: no topics to record', file=sys.stderr)
-        print(' usage: rosrun bwi_logging record' +
+        print(' usage: rosrun tbot2_logging record' +
               ' _topics:="topic1 topic2 ..."' +
-              ' [_directory:=""] [_prefix:="bwi"]', file=sys.stderr)
+              ' [_directory:=""] [_prefix:="tbot2"]', file=sys.stderr)
         return 9
     rospy.loginfo('topics to record: ' + topics)
 
@@ -96,7 +96,7 @@ def main(argv=None):
         # the BWI server.  The setsid isolates the uploading scripts
         # from ROS shutdown signals.  The -w120 waits two minutes
         # before starting to upload.
-        upload_cmd = ['/usr/bin/setsid', '/usr/local/bin/bwi',
+        upload_cmd = ['/usr/bin/setsid', '/usr/local/bin/tbot2',
                       'bags', '-w120', '-d', logdir.pwd(), prefix, '&']
         cmd_str = ' '.join(x for x in upload_cmd)
         print('running command: ' + cmd_str)
