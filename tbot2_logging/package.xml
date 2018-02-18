@@ -3,8 +3,11 @@
 
   <name>tbot2_logging</name>
   <version>0.0.1</version>
+
   <description>Logging package that creates ROS bag files, repurposed from bwi_logging</description>
   <maintainer email="piyushk@gmail.com">Piyush Khandelwal</maintainer>
+
+
   <license>BSD</license>
 
   <buildtool_depend>catkin</buildtool_depend>

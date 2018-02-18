@@ -88,6 +88,7 @@ def main(argv=None):
 
     rospy.loginfo('rosbag returned status: ' + str(status))
 
+
     # No server yet for Turtlebots
     # if status == 0 and prefix == DEFAULT_PREFIX:
 
@@ -102,6 +103,7 @@ def main(argv=None):
     #     cmd_str = ' '.join(x for x in upload_cmd)
     #     print('running command: ' + cmd_str)
     #     os.system(cmd_str)
+
 
     return status
 
