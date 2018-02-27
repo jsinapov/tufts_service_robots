@@ -16,5 +16,9 @@
 	
 	<!-- launch filters -->
 	<!-- <include file="$(find tbot2_filters)/launch/tbot2_filters.launch"/> -->
+
+	<!-- launch logging -->
+	<include file="$(find tbot2_launch)/launch/logging.launch">
+	</include>
 	
 </launch>
