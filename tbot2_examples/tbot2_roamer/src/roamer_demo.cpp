@@ -1,4 +1,4 @@
-#include <ros/ros.h>
+    #include <ros/ros.h>
 #include <tf/tf.h>
 #include <move_base_msgs/MoveBaseAction.h>
 #include <actionlib/client/simple_action_client.h>
@@ -28,7 +28,7 @@ int move_turtle_bot (double x, double y, double yaw)
         move_base_msgs::MoveBaseGoal goal;
         
         
-        std::cout<<"Target Position : "<< x  << << ", " << y << std::endl;
+        std::cout<<"Target Position : "<< x  << ", " << y << std::endl;
         
         //set the header
         goal.target_pose.header.stamp = ros::Time::now();
@@ -58,18 +58,18 @@ int main(int argc, char **argv)
         
         const int num_locations = 6;
         double locations[num_locations][3] = { {-0.432,6.3,0.0},
-											   {5.48,6.4,0.0},
-											   {21.3,6.16,0.0},
-											   {21.8,13.9,0.0},
-											   {5.8,13.9,0.0},
-											   {-0.444,13.8,0.0}};
-											   
-		std::string location_names [num_locations] = {"Stairs",
-												      "Kitchen Right",
-												      "Collab Room Right",
-												      "Collab Room Left",
-												      "Kitchen Left",
-												      "Elevator"};
+                                               {5.48,6.4,0.0},
+                                               {21.3,6.16,0.0},
+                                               {21.8,13.9,0.0},
+                                               {5.8,13.9,0.0},
+                                               {-0.444,13.8,0.0}};
+                                               
+        std::string location_names [num_locations] = {"Stairs",
+                                                      "Kitchen Right",
+                                                      "Collab Room Right",
+                                                      "Collab Room Left",
+                                                      "Kitchen Left",
+                                                      "Elevator"};
         
         double x1,y1,x2,y2,x3,y3,x4,y4 = 0;
         
