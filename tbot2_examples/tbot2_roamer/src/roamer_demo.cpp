@@ -28,7 +28,7 @@ int move_turtle_bot (double x, double y, double yaw)
         move_base_msgs::MoveBaseGoal goal;
         
         
-        std::cout<<"Going to :"<< x  << y;
+        std::cout<<"Target Position : "<< x  << ", " << y << std::endl;
         
         //set the header
         goal.target_pose.header.stamp = ros::Time::now();
@@ -54,38 +54,48 @@ int main(int argc, char **argv)
         ros::init(argc, argv, "move_base_client");
         ros::NodeHandle n;
         
-        //the order is:
-        // 0: right outside lab
-        // 1: right outside collaborative lounge
-        // 2: right outside kitchenette
-        // 3: close to entrnace stairs
-        
         double home_location[3] = {5.65,13.8,0.0};
         
-        int num_locations = 7;
-        double locations[7][3] = { {21.7,13.7,0.0},{21.8,5.9,0.0},{-0.329,6.21,0.0},{1.0,13.6,0.0},{5.65,13.8,0.0},{7.5,9.8,0.0},{21.3,19.5,0.0} };
+        const int num_locations = 6;
+        double locations[num_locations][3] = { {-0.432,6.3,0.0},
+                                               {5.48,6.4,0.0},
+                                               {21.3,6.16,0.0},
+                                               {21.8,13.9,0.0},
+                                               {5.8,13.9,0.0},
+                                               {-0.444,13.8,0.0}};
+                                               
+        std::string location_names [num_locations] = {"Stairs",
+                                                      "Kitchen Right",
+                                                      "Collab Room Right",
+                                                      "Collab Room Left",
+                                                      "Kitchen Left",
+                                                      "Elevator"};
         
         double x1,y1,x2,y2,x3,y3,x4,y4 = 0;
         
-        int c = 0;  
+        int start_index = 3;
+        int goal_index = start_index;  
         
         while (ros::ok()) {
                 
                 //move to next location
-                move_turtle_bot(locations[c][0],locations[c][1],locations[c][2]);
+                std::cout<<"Target Location : "<< location_names[goal_index] << std::endl;
+
+                move_turtle_bot(locations[goal_index][0],locations[goal_index][1],locations[goal_index][2]);
                 
-                //rotate around
+
+                //rotate around 
                 for (int p = 0; p < 3; p ++){
-                        move_turtle_bot(locations[c][0],locations[c][1],locations[c][2]+(p+1)*PI/2);
+                        move_turtle_bot(locations[goal_index][0],locations[goal_index][1],locations[goal_index][2]+(p+1)*PI/2);
                 }
                 sleepok(10,n);
                 
                 //increment location 
-                c++;
+                goal_index++;
                 
                 //Loop back
-                if (c >= num_locations){
-                        c = 0;
+                if (goal_index >= num_locations){
+                        goal_index = 0;
                 }
         }
         
