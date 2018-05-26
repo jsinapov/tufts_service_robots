@@ -16,7 +16,7 @@ def main():
         file_part, extension = os.path.splitext(file_name)
 
         print("")
-        print("- name: {}".format(file_part))
+        print("{}:".format(file_part))
 
         get_x = False
         get_y = False
@@ -33,7 +33,8 @@ def main():
                     continue
                 if get_y:
                     y = strip_space_re.sub("", line)
-                    print("  location: x={} y={}".format(x, y))
+                    print("  x:{}".format(x))
+                    print("  y:{}".format(y))
                     break
 
 
