@@ -33,8 +33,8 @@ def main():
                     continue
                 if get_y:
                     y = strip_space_re.sub("", line)
-                    print("  x:{}".format(x))
-                    print("  y:{}".format(y))
+                    print("  x: {}".format(x))
+                    print("  y: {}".format(y))
                     break
 
 
