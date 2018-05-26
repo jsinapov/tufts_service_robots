@@ -2,10 +2,6 @@ foyer_adjacent_hall1:
   x: -0.650719323467
   y: 6.51777247512
 
-hall2_adjacent_rm226-228_sinapov_lab:
-  x: 15.2735710501
-  y: 14.0124343901
-
 rm228_sinapov_lab_adjacent_rm226_graduate_office:
   x: 12.3665883152
   y: 21.3269766858
@@ -69,6 +65,10 @@ hall1_adjacent_rm213_prof_jivko_sinapov:
 hall3_adjacent_hall2:
   x: 5.63635037067
   y: 15.9575248473
+
+hall2_adjacent_rm226_graduate_office:
+  x: 15.2735710501
+  y: 14.0124343901
 
 hall2_adjacent_rm239_prof_diane_souvaine:
   x: -7.48538300739
