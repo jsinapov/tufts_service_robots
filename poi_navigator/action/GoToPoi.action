@@ -1,0 +1,8 @@
+# Define the goal
+string destination_name  # The named POI to navigate to
+---
+# Define the result
+uint32 num_completed  # I dunno. Better ideas? Probably need *some* thing here.
+---
+# Define a feedback message
+float32 percent_complete
