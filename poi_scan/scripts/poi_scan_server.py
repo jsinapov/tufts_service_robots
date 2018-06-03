@@ -19,6 +19,7 @@ from tf.transformations import quaternion_from_euler
 import threading
 import time
 import subprocess
+import psutil
 import signal
 import math
 
@@ -63,7 +64,7 @@ class PoiScanServer:
         # script that will itself run subprocess. So I'm not changing, but it might be useful to know someday:
         # https://github.com/ros/ros_comm/blob/melodic-devel/tools/rosbag/src/rosbag/rosbag_main.py
         cmd = ['rosbag', 'record', '-O', bagfile, '--lz4']
-        cmd.extend(goal.topics)
+        cmd.extend(topics)
         rospy.loginfo('Starting rosbag record: {}'.format(cmd))
 
         if not bagfile.startswith("/"):
@@ -72,11 +73,7 @@ class PoiScanServer:
             rospy.logwarn("Warning: Creating bagfile {}".format(os.path.join(os.getcwd(), bagfile)))
 
         # record in background
-        # Even though I want to capture stdout and stderr, I had problems with communicate() hanging, so
-        # my program hangs, while the child process appears as <defunct>. Seems to be a python bug. Just
-        # don't worry about stdout or stderr, and everything is stable.
-        # bag_process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        bag_process = subprocess.Popen(cmd)
+        bag_process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         rospy.loginfo('Pausing for arbitrary delay, to let rosbag start...')
         time.sleep(4.0)  # ummm... arbitrary delay, to let rosbag start... it's not instantaneous...
@@ -107,15 +104,16 @@ class PoiScanServer:
 
         rospy.loginfo("Completed full circle. Sending SIGINT to PID {}".format(bag_process.pid))
 
+        parent = psutil.Process(bag_process.pid)
+        for child in parent.get_children(recursive=True):
+            child.send_signal(signal.SIGINT)
         bag_process.send_signal(signal.SIGINT)  # Ctrl-C, rosbag will exit gracefully, unlike when you use terminate()
 
-        # See above comments about communicate() hanging. So this block is commented out, and instead,
-        # I'm using the wait() command below, discarding whatever is on stdout and stderr.
-        # (bag_out, bag_err) = bag_process.communicate()
-        # rospy.loginfo("rosbag stdout:")
-        # rospy.loginfo("{}".format(bag_out))
-        # rospy.loginfo("rosbag stderr:")
-        # rospy.loginfo("{}".format(bag_err))
+        (bag_out, bag_err) = bag_process.communicate()
+        rospy.loginfo("rosbag stdout:")
+        rospy.loginfo("{}".format(bag_out))
+        rospy.loginfo("rosbag stderr:")
+        rospy.loginfo("{}".format(bag_err))
 
         rospy.logdebug("Waiting for PID {}".format(bag_process.pid))
         bag_process.wait()
