@@ -37,16 +37,7 @@ class PoiScanServer:
         stop_time = goal.stop_time  # type: float
         return_to_original = goal.return_to_original  # type: bool
 
-        rospy.loginfo('poi_scan_server topics: {}'.format(topics))
-        rospy.loginfo('poi_scan_server bagfile: {}'.format(bagfile))
-        rospy.loginfo('poi_scan_server num_stops: {}'.format(num_stops))
-        rospy.loginfo('poi_scan_server stop_time: {}'.format(stop_time))
-        rospy.loginfo('poi_scan_server return_to_original: {}'.format(return_to_original))
-
-        num_moves = num_stops + 1
-
         move_base_client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
-        rospy.loginfo('poi_scan_server move_base_client.wait_for_server')
         move_base_client.wait_for_server()
 
         orig_pose = rospy.wait_for_message('/amcl_pose', PoseWithCovarianceStamped).pose.pose  # type: Pose
@@ -61,7 +52,6 @@ class PoiScanServer:
 
         move_base_goal.target_pose.header.stamp = rospy.Time.now()
         move_base_client.send_goal(move_base_goal)
-        rospy.loginfo('poi_scan_server move_base_client.wait_for_server')
         move_base_client.wait_for_result()
 
         # TODO: I should probably check this.
@@ -72,9 +62,9 @@ class PoiScanServer:
         # I found, that if you run 'rosbag' by shelling out like this, you're really just launching another python
         # script that will itself run subprocess. So I'm not changing, but it might be useful to know someday:
         # https://github.com/ros/ros_comm/blob/melodic-devel/tools/rosbag/src/rosbag/rosbag_main.py
-        cmd = ['rosbag', 'record', '-O', goal.bagfile, '--lz4']
+        cmd = ['rosbag', 'record', '-O', bagfile, '--lz4']
         cmd.extend(goal.topics)
-        rospy.loginfo('running command: {}'.format(cmd))
+        rospy.loginfo('Starting rosbag record: {}'.format(cmd))
 
         if not bagfile.startswith("/"):
             # I figure, if they specified an absolute path, they know exactly where the file is going.
@@ -88,8 +78,14 @@ class PoiScanServer:
         # bag_process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         bag_process = subprocess.Popen(cmd)
 
-        for move in range(num_moves):
-            yaw = move * 2 * math.pi / num_moves
+        rospy.loginfo('Pausing for arbitrary delay, to let rosbag start...')
+        time.sleep(4.0)  # ummm... arbitrary delay, to let rosbag start... it's not instantaneous...
+
+        rospy.loginfo("Position 0/{}".format(num_stops - 1))
+        time.sleep(stop_time)
+
+        for i in range(1, num_stops):
+            yaw = i * 2 * math.pi / num_stops
             q = quaternion_from_euler(0, 0, yaw)
             move_base_goal.target_pose.pose.orientation = Quaternion(q[0], q[1], q[2], q[3])
 
@@ -97,11 +93,20 @@ class PoiScanServer:
             move_base_client.send_goal(move_base_goal)
             move_base_client.wait_for_result()
 
-            rospy.loginfo("Position {}/{}".format(move, num_stops))
-
+            rospy.loginfo("Position {}/{}".format(i, num_stops - 1))
             time.sleep(stop_time)
 
-        rospy.logdebug("Sending SIGINT to PID {}".format(bag_process.pid))
+        # Finish rotating the whole circle by returning to yaw=0 position
+        yaw = 0  # radians counter-clockwise relative to map north
+        q = quaternion_from_euler(0, 0, yaw)
+        move_base_goal.target_pose.pose.orientation = Quaternion(q[0], q[1], q[2], q[3])
+
+        move_base_goal.target_pose.header.stamp = rospy.Time.now()
+        move_base_client.send_goal(move_base_goal)
+        move_base_client.wait_for_result()
+
+        rospy.loginfo("Completed full circle. Sending SIGINT to PID {}".format(bag_process.pid))
+
         bag_process.send_signal(signal.SIGINT)  # Ctrl-C, rosbag will exit gracefully, unlike when you use terminate()
 
         # See above comments about communicate() hanging. So this block is commented out, and instead,
@@ -115,14 +120,14 @@ class PoiScanServer:
         rospy.logdebug("Waiting for PID {}".format(bag_process.pid))
         bag_process.wait()
 
-        rospy.loginfo('finished command: {}'.format(cmd))
+        rospy.loginfo('Finished rosbag record')
 
         if return_to_original:
-            rospy.loginfo('Return to original orientation: {}'.format(cmd))
             move_base_goal.target_pose.pose.orientation = orig_pose.orientation
             move_base_goal.target_pose.header.stamp = rospy.Time.now()
             move_base_client.send_goal(move_base_goal)
             move_base_client.wait_for_result()
+            rospy.loginfo('Returned to original orientation')
 
         self.server.set_succeeded()
 
