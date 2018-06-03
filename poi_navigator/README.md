@@ -1,4 +1,4 @@
-#### poi_navigation
+#### poi_navigator
 
 Navigate the turtlebot to a Point of Interest (poi) by name.
 
@@ -11,7 +11,7 @@ In one window:
 In another window:
 
     roslaunch turtlebot_navigation amcl_demo.launch \
-    map_file:=/home/turtlebot/catkin_ws/src/tufts_service_robots/tufts_halligan/maps/real/2/2.yaml
+    map_file:=`rospack find tufts_halligan`/maps/real/2/2.yaml
 
 On the turtlebot, set the initial pose estimate:
 
@@ -19,13 +19,13 @@ On the turtlebot, set the initial pose estimate:
 
 In another window:
 
-    rosrun poi_navigation navigator.py
+    rosrun poi_navigator poi_navigator_server.py
 
 To see the list of available poi's:
 
-    rosed poi_navigation locations.yaml
+    rosed poi_navigator locations.yaml
 
-And to navigate to a poi. Note: If the following seems complex, it's not. Tab autocompletion populates almost the entire command string except the actual poi name. Just keep hitting tab.
+And finally:
 
-    rostopic pub --once /navigate_to_poi std_msgs/String "data: 'hall2_adjacent_hall3_and_kitchenette'"
+    rosrun poi_navigator poi_navigator_client.py
 
