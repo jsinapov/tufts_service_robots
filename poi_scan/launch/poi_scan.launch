@@ -1,0 +1,6 @@
+<launch>
+
+  <node pkg="poi_navigator" type="poi_navigator_server.py" name="poi_navigator_server" output="screen" />
+  <node pkg="poi_scan" type="poi_scan_server.py" name="poi_scan_server" output="screen" />
+
+</launch>
