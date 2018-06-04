@@ -1,0 +1,25 @@
+# Dropbox settings and caches
+.dropbox
+.dropbox.attr
+.dropbox.cache
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# vim swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
+
+# Temporary
+*~
+
+# PyCharm
+.idea
+
+# Temp files
+~$*
+*~
+*.tmp
+
