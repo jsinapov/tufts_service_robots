@@ -35,6 +35,8 @@ class TraverseMapByWaypoints:
         self.poi_name_locate = None  # type: callable(PoiNameLocatorRequest)
 
     def setup(self):
+        rospy.init_node('traverse_map_by_waypoints')
+
         # Read config from yaml file
         rospack = rospkg.RosPack()
         pkg_path = rospack.get_path('data_collector')
@@ -42,6 +44,9 @@ class TraverseMapByWaypoints:
 
         with open(traversal_config_yml_path, "r") as f:
             self.config = TraversalConfig(yaml.load(f.read()))
+
+        # Subscribe to current_pose. This must be done before setting initialpose
+
 
         # TODO: To set initialpose programmatically:
         # https://answers.ros.org/question/227129/localizing-turtlebot-programmatically-via-initialpose-topic/
@@ -61,6 +66,10 @@ class TraverseMapByWaypoints:
         # TODO: implement
         raise RuntimeError()
         pass
+
+    def set_initial_pose(self):
+        initial_position = self.get_point_from_waypoint(self.config.start_point)  # type: Point
+
 
     def drive_to_unconditional(self, waypoint):
         waypoint_pos = self.get_point_from_waypoint(waypoint)  # type: Point
@@ -113,6 +122,5 @@ class TraverseMapByWaypoints:
 
 
 if __name__ == "__main__":
-    rospy.init_node('traverse_map_by_waypoints')
     tm = TraverseMapByWaypoints()
     tm.traverse_map_by_waypoints()
