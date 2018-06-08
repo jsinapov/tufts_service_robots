@@ -44,12 +44,12 @@ class PoiNameLocatorServer:
 
     def spin(self):
         rospy.init_node('poi_name_locator_server')
+        self.load()
         s = rospy.Service('poi_name_locator', PoiNameLocator, self.handle_poi_name_locator_request)
-        print("Ready to lookup POI locations by name.")
+        rospy.loginfo("Ready to lookup POI locations by name.")
         rospy.spin()
 
 
 if __name__ == '__main__':
     poi_name_server = PoiNameLocatorServer()
-    poi_name_server.load()
     poi_name_server.spin()

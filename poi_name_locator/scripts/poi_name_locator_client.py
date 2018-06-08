@@ -16,8 +16,7 @@ def poi_name_locator_client(poi_name):
     try:
         poi_name_locator_callable = rospy.ServiceProxy('poi_name_locator', PoiNameLocator)
         response = poi_name_locator_callable(request)  # type: PoiNameLocatorResponse
-        if response is None:
-            return None
+        # response cannot be None. If server tries to return None, a rospy.ServiceException will raise here.
         position = response.position  # type: Point
         return position
     except rospy.ServiceException, e:

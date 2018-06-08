@@ -1,0 +1,44 @@
+# in my initial data, 7 units equates to around 10ft
+sample_distance: 7
+
+# start_point should be a known waypoint, near the first waypoint, so the turtlebot can know its initial pose without
+# user needing to enter it manually, and turtlebot can navigate itself from the start_point to the first waypoint.
+start_point: hall2_adjacent_rm212_collaboration_room
+
+# If you have existing data, enter their coordinates, like:
+#     existing_data: [ {x: 4.4, y: 5.5 }, {x: 4.3, y: 12.7} ]
+existing_data: []
+
+waypoints:
+  - hall2_adjacent_men_restroom
+  - hall2_adjacent_rm212_collaboration_room
+  - hall2_adjacent_rm226_graduate_office
+  - rm226_graduate_office_adjacent_hall2
+  - rm226_graduate_office_adjacent_rm228_sinapov_lab
+  - rm228_sinapov_lab_adjacent_rm226_graduate_office
+  - rm226_graduate_office_adjacent_rm228_sinapov_lab
+  - rm226_graduate_office_adjacent_hall2
+  - hall2_adjacent_rm226_graduate_office
+  - hall2_adjacent_hall3_and_kitchenette
+  - hall3_adjacent_rm227_simulation_lab
+  - hall2_adjacent_hall3_and_kitchenette
+  - hall2_adjacent_rm239_prof_diane_souvaine
+  - elevator_adjacent_foyer
+  - foyer_adjacent_elevator
+  - foyer_sitting_area
+  - foyer_adjacent_hall1
+  - foyer_adjacent_rm245_main_office
+  - foyer_sitting_area
+  - foyer_adjacent_hall1
+  - hall1_adjacent_foyer
+  - hall1_adjacent_rm204_kitchenette
+  - hall2_adjacent_hall3_and_kitchenette
+  - hall1_adjacent_rm204_kitchenette
+  - hall1_adjacent_rm212_collab_room
+  - rm212_collaboration_room_adjacent_hall1
+  - rm212_collaboration_room_adjacent_hall2
+  - hall2_adjacent_rm212_collaboration_room
+  - rm212_collaboration_room_adjacent_hall2
+  - rm212_collaboration_room_adjacent_hall1
+  - hall1_adjacent_rm212_collab_room
+  - hall1_adjacent_rm215_prof_rob_jacob

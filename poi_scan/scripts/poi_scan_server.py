@@ -1,11 +1,12 @@
 #!/usr/bin/env python
+from __future__ import print_function
+
 import rospy
 import roslib
 roslib.load_manifest('poi_scan')
 from std_msgs.msg import String
 from std_msgs.msg import Header
 import yaml
-from pprint import pprint
 import rospkg
 import os
 import actionlib
@@ -30,6 +31,7 @@ class PoiScanServer:
     def __init__(self):
         self.server = actionlib.SimpleActionServer('poi_scan_server', PoiScanAction, self.execute, False)
         self.server.start()
+        rospy.loginfo("ready to perform scanning action")
 
     def execute(self, goal):
         topics = goal.topics  # type: list

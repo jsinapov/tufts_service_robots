@@ -3,7 +3,6 @@ import rospy
 from std_msgs.msg import String
 from std_msgs.msg import Header
 import yaml
-from pprint import pprint
 import rospkg
 import os
 import actionlib
