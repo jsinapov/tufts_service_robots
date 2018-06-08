@@ -9,6 +9,8 @@ import actionlib
 from move_base_msgs.msg import MoveBaseAction
 from move_base_msgs.msg import MoveBaseGoal
 from geometry_msgs.msg import Point
+from geometry_msgs.msg import PoseWithCovarianceStamped
+from geometry_msgs.msg import PoseWithCovariance
 from std_msgs.msg import String
 from std_msgs.msg import Header
 from poi_name_locator.srv import PoiNameLocator
@@ -31,7 +33,7 @@ class TraversalConfig:
 class TraverseMapByWaypoints:
     def __init__(self):
         self.config = None  # type: TraversalConfig
-        self.current_position = None  # type: Point
+        self.current_pose = None  # type: PoseWithCovarianceStamped
         self.poi_name_locate = None  # type: callable(PoiNameLocatorRequest)
 
     def setup(self):
@@ -46,14 +48,26 @@ class TraverseMapByWaypoints:
             self.config = TraversalConfig(yaml.load(f.read()))
 
         # Subscribe to current_pose. This must be done before setting initialpose
-
+        self.amcl_pose_subscriber = rospy.Subscriber("amcl_pose", PoseWithCovarianceStamped, self.handle_amcl_pose_msg)
+        loop_count = 0
+        while (not rospy.core.is_shutdown()) and self.current_pose == None:
+            rospy.rostime.wallsleep(0.1)
+            loop_count += 1
+            if loop_count > 50:
+                rospy.logwarn("amcl_pose_subscriber is taking a long time. Am I stuck?")
+        if rospy.core.is_shutdown():
+            return
 
         # TODO: To set initialpose programmatically:
         # https://answers.ros.org/question/227129/localizing-turtlebot-programmatically-via-initialpose-topic/
+        
 
         rospy.loginfo("Waiting for poi_name_locator service")
         rospy.wait_for_service('poi_name_locator')
         self.poi_name_locate = rospy.ServiceProxy('poi_name_locator', PoiNameLocator)
+
+    def handle_amcl_pose_msg(self, pose):
+        self.current_pose = pose
 
     def get_point_from_waypoint(self, waypoint):
         request = PoiNameLocatorRequest(waypoint)
