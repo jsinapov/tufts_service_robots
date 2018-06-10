@@ -1,5 +1,5 @@
-# in my initial data, 7 units equates to around 10ft
-sample_distance: 7
+# in my initial data, 1 unit equals about 3.1 ft. So 3.22 units is around 10ft
+sample_distance: 3.22
 
 # If start_point is specified, you should physically place the turtlebot at that location before launching this
 # program. It should be near waypoint[0] but should not be waypoint[0]. The turtlebot will drive itself to waypoint[0].
@@ -20,8 +20,21 @@ poi_scan_return_to_original_orientation: True
 
 # If you have existing data, enter their coordinates, like:
 #     existing_data: [ {x: 4.4, y: 5.5 }, {x: 4.3, y: 12.7} ]
+#
+# Equivalently, you could format it like this:
+#     existing_data:
+#       - {x: 4.4, y: 5.5 }
+#       - {x: 4.3, y: 12.7}
+#
 # If you don't have existing data, use the empty list []
 existing_data: []
+
+# If there are locations that you want to definitely capture, even though there was already another capture
+# nearby, list them here. You might want to do this, for example, if there's a small room that's surrounded by
+# hallways that were captured, so technically there's a capture already nearby, but you want to capture it anyway
+# due to the fact that the robot can't see through walls.
+force_capture:
+  - rm228_sinapov_lab_adjacent_rm226_graduate_office
 
 waypoints:
   - hall2_adjacent_men_restroom
@@ -38,9 +51,7 @@ waypoints:
   - hall2_adjacent_hall3_and_kitchenette
   - hall2_adjacent_rm239_prof_diane_souvaine
   - elevator_adjacent_foyer
-  - foyer_adjacent_elevator
   - foyer_sitting_area
-  - foyer_adjacent_hall1
   - foyer_adjacent_rm245_main_office
   - foyer_sitting_area
   - foyer_adjacent_hall1

@@ -14,11 +14,11 @@ In second terminal:
 
     roslaunch turtlebot_navigation amcl_demo.launch map_file:=`rospack find tufts_halligan`/maps/real/2/2.yaml
 
-If you did not specify `start_point` in the yaml file:
+If you specified `start_point` in the yaml file, move the robot to that location now, oriented toward yaw=0.
+
+If you did not specify `start_point` in the yaml file, you need to manually set the initialpose estimate:
 
     roslaunch turtlebot_rviz_launchers view_navigation.launch
-    
-        Give it an initial pose estimate
 
 In another terminal:
 

@@ -44,6 +44,12 @@ class TraversalConfig:
             self.start_point = yaml_load['start_point']  # type: str
         else:
             self.start_point = None  # type: str
+
+        if 'force_capture' in yaml_load.keys():
+            self.force_capture = yaml_load['force_capture']  # type: list
+        else:
+            self.force_capture = []  # type: list
+
         self.waypoints = yaml_load['waypoints']  # type: list
         self.sample_distance = float(yaml_load['sample_distance'])  # type: float  # Also, cast ints and strs to float.
         self.existing_data = yaml_load['existing_data']  # type: list  # list of dicts, each dict contains 'x' and 'y'
@@ -171,6 +177,10 @@ class TraverseMapByWaypoints:
         client.send_goal(goal)
         client.wait_for_result()
 
+        existing_data_path = os.path.join(self.config.output_dir, "existing_data.txt")
+        with open(existing_data_path, 'w') as f:
+            f.write('{}'.format(self.config.existing_data))
+
     def drive_to_waypoint(self, waypoint):  # type: (str) -> None
         waypoint_pos = self.get_point_from_waypoint(waypoint)  # type: Point
 
@@ -256,6 +266,8 @@ class TraverseMapByWaypoints:
                 self.collect_data()
 
             if self.arrived_at_waypoint(self.config.waypoints[waypoint_num]):
+                if self.config.waypoints[waypoint_num] in self.config.force_capture:
+                    self.collect_data()
                 waypoint_num += 1
                 continue
 
