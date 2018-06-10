@@ -62,8 +62,8 @@ class PoiScanServer:
 
         # LZ4 is very fast compression, won't slow down your system, usually speeds up your system due to less I/O
         # BZ2 is very compute-intensive, strong, slow compression. Hence not using it here.
-        # I found, that if you run 'rosbag' by shelling out like this, you're really just launching another python
-        # script that will itself run subprocess. So I'm not changing, but it might be useful to know someday:
+        # I found, that if you set_pose 'rosbag' by shelling out like this, you're really just launching another python
+        # script that will itself set_pose subprocess. So I'm not changing, but it might be useful to know someday:
         # https://github.com/ros/ros_comm/blob/melodic-devel/tools/rosbag/src/rosbag/rosbag_main.py
         cmd = ['rosbag', 'record', '-O', bagfile, '--lz4']
         cmd.extend(topics)

@@ -21,6 +21,6 @@ After navigating to a point on the map, `poi_scan_server` can start recording a 
 
     roslaunch poi_scan poi_scan.launch
 
- And finally, you can use it. The following is a simple client usage example:
+ And finally, you can use it. The following is a simple client usage example. `poi_scan_client.py` is hard-coded to drive to 'hall2_adjacent_rm212_collaboration_room' and then perform the scan.
 
     rosrun poi_scan poi_scan_client.py

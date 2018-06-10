@@ -1,12 +1,26 @@
 # in my initial data, 7 units equates to around 10ft
 sample_distance: 7
 
-# start_point should be a known waypoint, near the first waypoint, so the turtlebot can know its initial pose without
-# user needing to enter it manually, and turtlebot can navigate itself from the start_point to the first waypoint.
+# If start_point is specified, you should physically place the turtlebot at that location before launching this
+# program. It should be near waypoint[0] but should not be waypoint[0]. The turtlebot will drive itself to waypoint[0].
+# The turtlebot will assume yaw 0.
+# If start_point is not specified, you must manually set initialpose via
+# "roslaunch turtlebot_rviz_launchers view_navigation.launch" before launching traverse_map_by_waypoints.py.
 start_point: hall2_adjacent_rm212_collaboration_room
+
+topics: ['camera/depth/image_raw', 'camera/rgb/image_raw', 'amcl_pose']
+# topics = ['odom', 'clock']  # available in gazebo
+
+# directory will be created if it does not exist
+output_dir: '/home/turtlebot/data_collector_output'
+
+poi_scan_num_stops: 8
+poi_scan_stop_time: 3.0  # sec
+poi_scan_return_to_original_orientation: True
 
 # If you have existing data, enter their coordinates, like:
 #     existing_data: [ {x: 4.4, y: 5.5 }, {x: 4.3, y: 12.7} ]
+# If you don't have existing data, use the empty list []
 existing_data: []
 
 waypoints:

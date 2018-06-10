@@ -83,7 +83,7 @@ def main(argv=None):
     cmd.extend(topics.split())
     rospy.loginfo('running command: ' + str(cmd))
 
-    # run the rosbag command
+    # set_pose the rosbag command
     status = subprocess.call(cmd)
 
     rospy.loginfo('rosbag returned status: ' + str(status))
