@@ -169,7 +169,7 @@ class TraverseMapByWaypoints:
 
         # bagfile_name_prefix will be like "/foo/bar/1528572992" which is timestamp in seconds.
         # poi_scan_server generates suffixes like "_pos0.bag" etc.
-        goal.bagfile_name_prefix = os.path.join(self.config.output_dir, "".format(int(time.time())))
+        goal.bagfile_name_prefix = os.path.join(self.config.output_dir, "{}".format(int(time.time())))
 
         goal.num_stops = self.config.poi_scan_num_stops
         goal.duration = self.config.poi_scan_duration
