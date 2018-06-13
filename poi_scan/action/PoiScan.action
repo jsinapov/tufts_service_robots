@@ -1,8 +1,8 @@
 # Define the goal
 string[] topics              # list of topics to record
-string   bagfile             # name of file to record out to
+string   bagfile_name_prefix # output bagfiles will begin with this prefix. Suffixes will be generated like "_pos0.bag"
 uint32   num_stops           # number of times to stop during one 360degree rotation
-float32  stop_time           # number of seconds to pause at each stop
+float32  duration            # number of seconds to pause at each stop
 bool     return_to_original  # set to true, if you want to return to original orientation when done
 ---
 # Define the result

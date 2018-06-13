@@ -56,7 +56,7 @@ class TraversalConfig:
         self.topics = yaml_load['topics']  # type: list
         self.output_dir = yaml_load['output_dir']  # type: str
         self.poi_scan_num_stops = yaml_load['poi_scan_num_stops']  # type: int
-        self.poi_scan_stop_time = yaml_load['poi_scan_stop_time']  # type: float
+        self.poi_scan_duration = yaml_load['poi_scan_duration']  # type: float
         self.poi_scan_return_to_original_orientation = \
             yaml_load['poi_scan_return_to_original_orientation']  # type: bool
 
@@ -167,11 +167,12 @@ class TraverseMapByWaypoints:
         goal = PoiScanGoal()
         goal.topics = self.config.topics
 
-        # output bagfile name will be like "1528572992.bag" which is the timestamp in seconds.
-        goal.bagfile = os.path.join(self.config.output_dir, "{}.bag".format(int(time.time())))
+        # bagfile_name_prefix will be like "/foo/bar/1528572992" which is timestamp in seconds.
+        # poi_scan_server generates suffixes like "_pos0.bag" etc.
+        goal.bagfile_name_prefix = os.path.join(self.config.output_dir, "".format(int(time.time())))
 
         goal.num_stops = self.config.poi_scan_num_stops
-        goal.stop_time = self.config.poi_scan_stop_time
+        goal.duration = self.config.poi_scan_duration
         goal.return_to_original = self.config.poi_scan_return_to_original_orientation
 
         client.send_goal(goal)
