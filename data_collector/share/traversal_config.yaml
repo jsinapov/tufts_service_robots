@@ -19,7 +19,7 @@ poi_scan_duration: 3.0  # sec
 
 # all spins will start and end by spinning to yaw=0. If this is set to true, one more spin will be done after
 # the spinning data collection, return to the original orientation that the robot had before doing data_scan.
-poi_scan_return_to_original_orientation: True
+poi_scan_return_to_original_orientation: False
 
 # If you have existing data, enter their coordinates, like:
 #     existing_data: [ {x: 4.4, y: 5.5 }, {x: 4.3, y: 12.7} ]
