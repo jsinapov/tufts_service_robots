@@ -1,0 +1,6 @@
+<launch>
+
+  <node pkg="poi_name_locator" type="poi_name_locator_server.py" name="poi_name_locator_server" output="screen" />
+  <node pkg="poi_scan" type="poi_scan_server.py" name="poi_scan_server" output="screen" />
+
+</launch>
