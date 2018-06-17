@@ -17,7 +17,7 @@ roslaunch turtlebot_bringup minimal.launch
 In second terminal:
 
 ```
-roslaunch tbot2_launch amcl_navigation.launch
+roslaunch turtlebot_navigation amcl_demo.launch map_file:=`rospack find tufts_halligan`/maps/real/2/2.yaml
 ```
 
 #### poi_name_locator_client.py
