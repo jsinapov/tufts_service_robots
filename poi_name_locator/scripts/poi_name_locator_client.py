@@ -10,7 +10,7 @@ from poi_name_locator.srv import PoiNameLocatorRequest
 from poi_name_locator.srv import PoiNameLocatorResponse
 
 
-def poi_name_locator_client(poi_name):
+def poi_name_locator_client(poi_name):  # type: (str) -> Point
     request = PoiNameLocatorRequest(poi_name)
     rospy.wait_for_service('poi_name_locator')
     try:

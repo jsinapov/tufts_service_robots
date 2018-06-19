@@ -1,0 +1,111 @@
+elevator:
+  x: -2.01373639665
+  y: 11.7014959602
+
+elevator_adjacent_foyer:
+  x: -0.437290137808
+  y: 10.8503276132
+
+foyer_adjacent_elevator:
+  x: -0.798016688696
+  y: 8.47443332346
+
+foyer_adjacent_hall1:
+  x: -0.650719323467
+  y: 6.51777247512
+
+foyer_adjacent_rm245_main_office:
+  x: -5.03024698298
+  y: 1.25530134025
+
+foyer_sitting_area:
+  x: -1.15999901432
+  y: 2.54972371606
+
+hall1_adjacent_foyer:
+  x: 1.02846898275
+  y: 6.21969908597
+
+hall1_adjacent_rm204_kitchenette:
+  x: 5.38917623316
+  y: 6.25605316313
+
+hall1_adjacent_rm209_conference_room:
+  x: 13.4319031612
+  y: 6.08059150836
+
+hall1_adjacent_rm212_collab_room:
+  x: 21.0895854862
+  y: 6.0011872162
+
+hall1_adjacent_rm213_prof_jivko_sinapov:
+  x: 23.0637321946
+  y: 5.78044253952
+
+hall1_adjacent_rm215_prof_rob_jacob:
+  x: 25.6360095227
+  y: 5.98617946751
+
+hall2_adjacent_elevator:
+  x: -1.7565978707
+  y: 13.9588933665
+
+hall2_adjacent_hall3_and_kitchenette:
+  x: 5.57928385656
+  y: 13.9321390831
+
+hall2_adjacent_men_restroom:
+  x: 29.6786247035
+  y: 14.0964120614
+
+hall2_adjacent_rm212_collaboration_room:
+  x: 21.9039601356
+  y: 13.8670889491
+
+hall2_adjacent_rm226_graduate_office:
+  x: 15.2735710501
+  y: 14.0124343901
+
+hall2_adjacent_rm239_prof_diane_souvaine:
+  x: -7.48538300739
+  y: 14.9262725414
+
+hall2_adjacent_women_restroom:
+  x: 26.0829791464
+  y: 14.1902223872
+
+hall3_adjacent_hall2:
+  x: 5.63635037067
+  y: 15.9575248473
+
+hall3_adjacent_rm227_simulation_lab:
+  x: 6.3625647621
+  y: 37.9416160591
+
+hall3_adjacent_rm230_prof_roni_khardon:
+  x: 5.57176135127
+  y: 22.5141656783
+
+hall3_adjacent_rm236_dean_dr_karen_panetta:
+  x: 5.85080682644
+  y: 32.4480957561
+
+rm212_collaboration_room_adjacent_hall1:
+  x: 21.170523141
+  y: 8.0662080012
+
+rm212_collaboration_room_adjacent_hall2:
+  x: 21.6652247305
+  y: 12.0666929833
+
+rm226_graduate_office_adjacent_hall2:
+  x: 15.1729078754
+  y: 15.9476761634
+
+rm226_graduate_office_adjacent_rm228_robotics_lab:
+  x: 14.4842745708
+  y: 20.5163510362
+
+rm228_sinapov_lab_adjacent_rm226_graduate_office:
+  x: 12.3665883152
+  y: 21.3269766858
