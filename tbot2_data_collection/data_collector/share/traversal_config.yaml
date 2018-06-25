@@ -17,7 +17,7 @@ output_dir: '/home/turtlebot/data_collector_output'
 
 poi_scan_num_stops: 8   # spin one full circle, stop this many times.
 poi_scan_duration: 3.0  # sec
-poi_scan_tune_rotation: 1.05  # arbitrarily, it seems to under-rotate about 5% on average, so overrotate 5%
+poi_scan_tune_rotation: 1.33  # arbitrarily, it seems to under-rotate by a ratio of about 3/4, so overrotate 4/3
 
 poi_scan_upload_url: 'https://turtlecloud.eecs.tufts.edu/api/v1.0/rosbags/' # must include trailing /
 poi_scan_rm_after_upload: True
