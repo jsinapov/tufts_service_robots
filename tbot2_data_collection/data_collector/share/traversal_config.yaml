@@ -8,8 +8,9 @@ sample_distance: 1
 # "roslaunch turtlebot_rviz_launchers view_navigation.launch" before launching traverse_map_by_waypoints.py.
 start_point: hall2_adjacent_rm212_collaboration_room
 
-topics: ['camera/depth/image_raw', 'camera/rgb/image_raw', 'amcl_pose']
-# topics = ['odom', 'clock']  # available in gazebo
+# topics: ['/camera/depth/image_raw', '/usb_cam/image_raw', '/amcl_pose']   # usb_cam for logitech external camera
+topics: ['/camera/depth/image_raw', '/camera/rgb/image_raw', '/amcl_pose']
+# topics = ['/odom', '/clock']  # available in gazebo
 
 # directory will be created if it does not exist
 output_dir: '/home/turtlebot/data_collector_output'
