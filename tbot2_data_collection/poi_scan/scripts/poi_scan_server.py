@@ -32,7 +32,6 @@ from poi_scan.msg import PoiScanAction, PoiScanGoal
 
 class PoiScanServer:
     def __init__(self):
-        #
         self._position_tolerance = 0.5
 
         self.server = actionlib.SimpleActionServer('poi_scan_server', PoiScanAction, self.execute, False)
@@ -103,7 +102,16 @@ class PoiScanServer:
             rospy.loginfo("{}".format(bag_err))
 
             if goal.upload_url != '':
-                self.do_upload(bagfile, goal.upload_url, goal.upload_token, goal.rm_after_upload)
+                # If rm_after_upload is set, don't just upload the new data; retry any previous data that
+                # wasn't already uploaded.
+                if goal.rm_after_upload:
+                    bag_dir = os.path.dirname(bagfile)
+                    for dir_entry in os.listdir(bag_dir):
+                        if dir_entry.endswith('.bag'):
+                            bag_dir_entry = os.path.join(bag_dir, dir_entry)
+                            self.do_upload(bag_dir_entry, goal.upload_url, goal.upload_token, goal.rm_after_upload)
+                else:
+                    self.do_upload(bagfile, goal.upload_url, goal.upload_token, goal.rm_after_upload)
 
             move_base_goal.target_pose.header.stamp = rospy.Time.now()
             move_base_client.send_goal(move_base_goal)
