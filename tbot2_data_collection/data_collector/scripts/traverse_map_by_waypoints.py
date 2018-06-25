@@ -50,6 +50,11 @@ class TraversalConfig:
         else:
             self.force_capture = []  # type: list
 
+        if 'poi_scan_tune_rotation' in yaml_load.keys():
+            self.poi_scan_tune_rotation = yaml_load['poi_scan_tune_rotation']  # type: float
+        else:
+            self.poi_scan_tune_rotation = 1.0
+
         self.waypoints = yaml_load['waypoints']  # type: list
         self.sample_distance = float(yaml_load['sample_distance'])  # type: float  # Also, cast ints and strs to float.
         self.existing_data = yaml_load['existing_data']  # type: list  # list of dicts, each dict contains 'x' and 'y'
@@ -172,6 +177,7 @@ class TraverseMapByWaypoints:
         goal.bagfile_name_prefix = os.path.join(self.config.output_dir, "{}".format(int(time.time())))
 
         goal.num_stops = self.config.poi_scan_num_stops
+        goal.tune_rotation = self.config.poi_scan_tune_rotation
         goal.duration = self.config.poi_scan_duration
         goal.return_to_original = self.config.poi_scan_return_to_original_orientation
 

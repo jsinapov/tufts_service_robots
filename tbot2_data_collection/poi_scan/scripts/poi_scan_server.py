@@ -37,10 +37,11 @@ class PoiScanServer:
         self.server.start()
         rospy.loginfo("ready to perform scanning action")
 
-    def execute(self, goal):
+    def execute(self, goal):  # type: (PoiScanGoal) -> None
         topics = goal.topics  # type: list
         bagfile_name_prefix = goal.bagfile_name_prefix  # type: str
         num_stops = goal.num_stops  # type: int
+        tune_rotation = goal.tune_rotation  # type: float
         duration = goal.duration  # type: float
         return_to_original = goal.return_to_original  # type: bool
 
@@ -75,7 +76,7 @@ class PoiScanServer:
         move_base_goal.target_pose.header.frame_id = "/base_link"
         move_base_goal.target_pose.pose.position = Point(0, 0, 0)  # don't move. Just spin.
         move_base_goal.target_pose.pose.orientation = Point(0, 0, 0)  # don't move. Just spin.
-        yaw = 2 * math.pi / num_stops
+        yaw = tune_rotation * 2 * math.pi / num_stops
         q = quaternion_from_euler(0, 0, yaw)
         move_base_goal.target_pose.pose.orientation = Quaternion(q[0], q[1], q[2], q[3])
 
