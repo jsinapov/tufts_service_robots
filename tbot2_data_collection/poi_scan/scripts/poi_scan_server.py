@@ -24,6 +24,8 @@ import subprocess
 import psutil
 import signal
 import math
+import hashlib
+import requests
 
 from poi_scan.msg import PoiScanAction, PoiScanGoal
 
@@ -100,6 +102,9 @@ class PoiScanServer:
             rospy.loginfo("stderr from rosbag:")
             rospy.loginfo("{}".format(bag_err))
 
+            if goal.upload_url != '':
+                self.do_upload(bagfile, goal.upload_url, goal.upload_token, goal.rm_after_upload)
+
             move_base_goal.target_pose.header.stamp = rospy.Time.now()
             move_base_client.send_goal(move_base_goal)
             move_base_client.wait_for_result()
@@ -112,6 +117,50 @@ class PoiScanServer:
             rospy.loginfo('Returned to original orientation')
 
         self.server.set_succeeded()
+
+    @staticmethod
+    def sha256_sum(file_path):  # type: (str) -> str
+        sha256 = hashlib.sha256()
+        with open(file_path, 'rb') as f:
+            chunk_size = 8192
+            while True:
+                chunk = f.read(chunk_size)
+                if len(chunk) == 0:
+                    break
+                sha256.update(chunk)
+        return sha256.hexdigest().lower()  # lower() just in case.
+
+    @staticmethod
+    def do_upload(bagfile, url, upload_token, rm_after_upload):  # type: (str, str, str, bool) -> None
+        if url == '':
+            return  # just in case
+
+        rospy.loginfo('Computing sha256 for {}'.format(bagfile))
+        sha256_sum = PoiScanServer.sha256_sum(bagfile)
+
+        payload = {
+            'access_token': upload_token,
+            'sha256sum': sha256_sum
+        }
+
+        bagfile_base = os.path.basename(bagfile)
+        rospy.loginfo('Uploading {}'.format(bagfile_base))
+        with open(bagfile, 'rb') as f:
+            result = requests.post(url + bagfile_base, data=f, params=payload)  # type: requests.Response
+
+        if result.status_code == 201:
+            if rm_after_upload:
+                rospy.loginfo('Successfully uploaded. Now doing rm {}'.format(bagfile_base))
+                os.remove(bagfile)
+            else:
+                rospy.loginfo('Successfully uploaded {}'.format(bagfile_base))
+        elif result.status_code == 409:
+            rospy.logwarn('File upload sha256sum mismatch. Trying again.')
+
+            # TODO: Implement some sort of max-tries
+            PoiScanServer.do_upload(bagfile, url, upload_token, rm_after_upload)
+        else:
+            rospy.logwarn('Failed upload {}. Result: {}'.format(bagfile_base, result))
 
 
 if __name__ == '__main__':

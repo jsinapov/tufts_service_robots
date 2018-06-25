@@ -55,6 +55,21 @@ class TraversalConfig:
         else:
             self.poi_scan_tune_rotation = 1.0
 
+        if 'poi_scan_upload_url' in yaml_load.keys():
+            self.poi_scan_upload_url = yaml_load['poi_scan_upload_url']  # type: str
+        else:
+            self.poi_scan_upload_url = ''
+
+        if 'poi_scan_rm_after_upload' in yaml_load.keys():
+            self.poi_scan_rm_after_upload = yaml_load['poi_scan_rm_after_upload']  # type: bool
+        else:
+            self.poi_scan_rm_after_upload = False
+
+        if 'poi_scan_upload_token' in yaml_load.keys():
+            self.poi_scan_upload_token = yaml_load['poi_scan_upload_token']  # type: str
+        else:
+            self.poi_scan_upload_token = ''
+
         self.waypoints = yaml_load['waypoints']  # type: list
         self.sample_distance = float(yaml_load['sample_distance'])  # type: float  # Also, cast ints and strs to float.
         self.existing_data = yaml_load['existing_data']  # type: list  # list of dicts, each dict contains 'x' and 'y'
@@ -180,6 +195,10 @@ class TraverseMapByWaypoints:
         goal.tune_rotation = self.config.poi_scan_tune_rotation
         goal.duration = self.config.poi_scan_duration
         goal.return_to_original = self.config.poi_scan_return_to_original_orientation
+
+        goal.upload_url = self.config.poi_scan_upload_url
+        goal.rm_after_upload = self.config.poi_scan_rm_after_upload
+        goal.upload_token = self.config.poi_scan_upload_token
 
         client.send_goal(goal)
         client.wait_for_result()
