@@ -4,7 +4,7 @@ Autonomously navigates an existing map, following predefined waypoints, stopping
 
 #### Usage
 
-First, edit `share/traversal_config.yaml`
+First, edit `share/traversal_config.yaml`. For info about named locations and their coordinates, see `poi_name_locator/README.md` and `poi_name_locator/share/config.yaml`
 
 In first terminal:
 
