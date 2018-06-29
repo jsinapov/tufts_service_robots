@@ -6,6 +6,8 @@ Autonomously navigates an existing map, following predefined waypoints, stopping
 
 First, edit `share/traversal_config.yaml`. For info about named locations and their coordinates, see `poi_name_locator/README.md` and `poi_name_locator/share/config.yaml`
 
+Please note: Once in a while, the turtlebot might get lost or stuck, so you might have to restart it. You'll see an entry for `existing_data` in the `config.yaml` file, and you'll find the turtlebot conveniently generates a list of data it collects as it progresses, saved in `~/data_collector_output/existing_data.txt`. So when it gets stuck, you can just copy that into the yaml file, re-run `catkin_make`, and restart.
+
 In first terminal:
 
     roslaunch turtlebot_bringup minimal.launch
