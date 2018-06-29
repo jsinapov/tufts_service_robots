@@ -14,6 +14,20 @@ In second terminal:
 
     roslaunch turtlebot_navigation amcl_demo.launch map_file:=`rospack find tufts_halligan`/maps/real/2/2.yaml
 
+If using the usb_cam:
+
+* Ensure you know the right device, and activate the camera:
+  * By default, it will use `/dev/video0` if you run without parameters: 
+  
+            rosrun usb_cam usb_cam_node
+  
+  * But you can specify parameters via
+
+            rosrun usb_cam usb_cam_node _video_device:=/dev/video1
+  
+  * You should see the LED indicator glowing on the camera.
+* Be sure you specify the correct topics to record in `poi_name_locator/share/config.yaml`
+
 If needed, load additional packages. For example, the following is to load the Logitech C310 usb webcam. First do the `_test` so you can see the images being captured, then stop it (Ctrl-C) and run without `_test`
 
     roslaunch data_collector usb_cam_test.launch
