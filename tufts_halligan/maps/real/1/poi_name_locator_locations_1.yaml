@@ -1,0 +1,53 @@
+front_door:
+  x: 26.7
+  y: 56.9
+  
+elevator:
+  x: 24.7
+  y: 44.7
+  
+outside_room_TODO:
+  x: 23.3
+  y: 42.4
+  
+inside_room_TODO:
+  x: 25.8
+  y: 40.7
+  
+start_of_lab_hallway:
+  x: 10.8
+  y: 43.4
+  
+hallway_outside_bathrooms:
+  x: -1.1
+  y: 43.4
+  
+hallway_outside_116_and_kitchen:
+  x: 10.6
+  y: 37.9
+  
+inside_kitchen:
+  x: 8.9
+  y: 37.8
+  
+inside_116:
+  x: 12.9
+  y: 37.0
+  
+hallway_outside_118:
+  x: 10.5
+  y: 28.3
+  
+inside_118:
+  x: 12.8
+  y: 29.6
+  
+hallway_outside_120:
+  x: 10.5
+  y: 26.1
+  
+inside_120:
+  x: 12.6
+  y: 25.3
+  
+
