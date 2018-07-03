@@ -1,5 +1,5 @@
-# Distance units are meters. Arbitrarily, I want to collect new datapoints every 3 meters.
-sample_distance: 3
+# Distance units are meters. Arbitrarily, I want to collect new datapoints every 1 meter.
+sample_distance: 1
 
 # If start_point is specified, you should physically place the turtlebot at that location before launching this
 # program. It should be near waypoint[0] but should not be waypoint[0]. The turtlebot will drive itself to waypoint[0].
@@ -8,14 +8,20 @@ sample_distance: 3
 # "roslaunch turtlebot_rviz_launchers view_navigation.launch" before launching traverse_map_by_waypoints.py.
 start_point: hall2_adjacent_rm212_collaboration_room
 
-topics: ['camera/depth/image_raw', 'camera/rgb/image_raw', 'amcl_pose']
-# topics = ['odom', 'clock']  # available in gazebo
+# topics: ['/camera/depth/image_raw', '/usb_cam/image_raw', '/amcl_pose']   # usb_cam for logitech external camera
+topics: ['/camera/depth/image_raw', '/camera/rgb/image_raw', '/amcl_pose']
+# topics = ['/odom', '/clock']  # available in gazebo
 
 # directory will be created if it does not exist
 output_dir: '/home/turtlebot/data_collector_output'
 
 poi_scan_num_stops: 8   # spin one full circle, stop this many times.
 poi_scan_duration: 3.0  # sec
+poi_scan_tune_rotation: 1.33  # arbitrarily, it seems to under-rotate by a ratio of about 3/4, so overrotate 4/3
+
+poi_scan_upload_url: 'https://turtlecloud.eecs.tufts.edu/api/v1.0/rosbags/' # must include trailing /
+poi_scan_rm_after_upload: True
+poi_scan_upload_token: ''  # do NOT git commit.
 
 # all spins will start and end by spinning to yaw=0. If this is set to true, one more spin will be done after
 # the spinning data collection, return to the original orientation that the robot had before doing data_scan.
@@ -37,18 +43,14 @@ existing_data: []
 # hallways that were captured, so technically there's a capture already nearby, but you want to capture it anyway
 # due to the fact that the robot can't see through walls.
 force_capture:
-  - rm228_sinapov_lab_adjacent_rm226_graduate_office
+  - rm228_robotics_lab_adjacent_rm226_graduate_office
 
 waypoints:
   - hall2_adjacent_men_restroom
   - hall2_adjacent_rm212_collaboration_room
-  - hall2_adjacent_rm226_graduate_office
   - rm226_graduate_office_adjacent_hall2
-  - rm226_graduate_office_adjacent_rm228_sinapov_lab
-  - rm228_sinapov_lab_adjacent_rm226_graduate_office
-  - rm226_graduate_office_adjacent_rm228_sinapov_lab
+  - rm228_robotics_lab_adjacent_rm226_graduate_office
   - rm226_graduate_office_adjacent_hall2
-  - hall2_adjacent_rm226_graduate_office
   - hall2_adjacent_hall3_and_kitchenette
   - hall3_adjacent_rm227_simulation_lab
   - hall2_adjacent_hall3_and_kitchenette
@@ -61,10 +63,6 @@ waypoints:
   - hall2_adjacent_hall3_and_kitchenette
   - hall1_adjacent_rm204_kitchenette
   - hall1_adjacent_rm212_collab_room
-  - rm212_collaboration_room_adjacent_hall1
-  - rm212_collaboration_room_adjacent_hall2
   - hall2_adjacent_rm212_collaboration_room
-  - rm212_collaboration_room_adjacent_hall2
-  - rm212_collaboration_room_adjacent_hall1
   - hall1_adjacent_rm212_collab_room
   - hall1_adjacent_rm215_prof_rob_jacob

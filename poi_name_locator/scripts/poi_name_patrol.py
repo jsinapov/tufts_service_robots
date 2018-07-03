@@ -94,4 +94,4 @@ class Patrol:
 
 if __name__ == "__main__":
     patrol = Patrol()
-    patrol.patrol('hall2_adjacent_rm212_collaboration_room', 'hall2_adjacent_rm226_graduate_office')
+    patrol.patrol('foyer_adjacent_rm245_main_office', 'hall1_adjacent_rm204_kitchenette')

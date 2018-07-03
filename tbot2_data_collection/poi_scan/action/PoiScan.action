@@ -2,8 +2,12 @@
 string[] topics              # list of topics to record
 string   bagfile_name_prefix # output bagfiles will begin with this prefix. Suffixes will be generated like "_pos0.bag"
 uint32   num_stops           # number of times to stop during one 360degree rotation
+float32  tune_rotation       # for example, value of 1.05 will overrotate 5% to compensate for natural underrrotation
 float32  duration            # number of seconds to pause at each stop
 bool     return_to_original  # set to true, if you want to return to original orientation when done
+string   upload_url          # after recording rosbag, automatically upload here
+bool     rm_after_upload     # if set to True, rosbag will be rm'd from turtlebot after successful upload
+string   upload_token        # authorization token for upload server
 ---
 # Define the result
 uint32 tasks_completed
