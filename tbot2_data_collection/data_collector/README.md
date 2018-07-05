@@ -30,6 +30,14 @@ If using the usb_cam:
   * You should see the LED indicator glowing on the camera.
 * Be sure you specify the correct topics to record in `poi_name_locator/share/config.yaml`
 
+#### ELLA ADDS:
+
+If you want to record people_msgs data, also run:
+
+roslaunch tbot2_launch leg_detector.launch
+
+And edit traversal_config.launch so that /people_tracker_measurements is one of the topics recorded.
+
 If you specified `start_point` in the yaml file, move the robot to that location now, oriented toward yaw=0.
 
 If you did not specify `start_point` in the yaml file, you need to manually set the initialpose estimate:
