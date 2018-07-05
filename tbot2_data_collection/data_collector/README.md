@@ -34,9 +34,23 @@ If using the usb_cam:
 
 If you want to record people_msgs data, also run:
 
-roslaunch tbot2_launch leg_detector.launch
+        roslaunch tbot2_launch leg_detector.launch
 
 And edit traversal_config.launch so that /people_tracker_measurements is one of the topics recorded.
+
+If you want to record audio, also run:
+
+        roslaunch audio_capture capture.launch
+
+And edit traversal_config.launch so that /audio is one of the topics recorded.
+
+NOTE: This requires installing the audio_common package. I have done this on donatello already, but if you're using 
+another robot, run the command: 
+
+        sudo apt-get install ros-indigo-audio-common
+        
+#### DONE ELLA ADDS        
+
 
 If you specified `start_point` in the yaml file, move the robot to that location now, oriented toward yaw=0.
 
