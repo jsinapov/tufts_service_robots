@@ -6,7 +6,7 @@ sample_distance: 1
 # The turtlebot will assume yaw 0.
 # If start_point is not specified, you must manually set initialpose via
 # "roslaunch turtlebot_rviz_launchers view_navigation.launch" before launching traverse_map_by_waypoints.py.
-start_point: hall2_adjacent_rm212_collaboration_room
+start_point: hall2_adjacent_men_restroom
 
 # topics: ['/camera/depth/image_raw', '/usb_cam/image_raw', '/amcl_pose']   # usb_cam for logitech external camera
 topics: ['/camera/depth/image_raw', '/camera/rgb/image_raw', '/amcl_pose', '/people_tracker_measurements', 
