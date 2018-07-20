@@ -5,5 +5,18 @@
   <node pkg="poi_name_locator" type="poi_name_locator_server.py" name="poi_name_locator_server" output="screen" />
   <node pkg="set_pose" type="set_pose_server.py" name="set_pose_server" output="screen" />
   <node pkg="poi_scan" type="poi_scan_server.py" name="poi_scan_server" output="screen" />
+  <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
 
+    <!-- When I tested this, video0 was the laptop built-in cam, and video1 was the logitech webcam -->
+    <!-- <param name="video_device" value="/dev/video0" /> -->
+    <param name="video_device" value="/dev/video1" />
+
+    <!-- I looked up the specs of the c310, and 640x480 is the max -->
+    <param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="pixel_format" value="yuyv" />
+    <param name="camera_frame_id" value="usb_cam" />
+    <param name="io_method" value="mmap"/>
+  </node>
+  
 </launch>
