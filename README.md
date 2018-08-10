@@ -16,6 +16,7 @@ Next, install all dependencies:
 ```
 $ cd ~/catkin_ws
 $ rosdep install --from-paths src --ignore-src --rosdistro $ROS_DISTRO -y
+$ git clone https://github.com/Slamtec/rplidar_ros.git
 ```
 
 Then, build everything:
