@@ -65,12 +65,15 @@ def scan():
     client.wait_for_server()
 
     goal = PoiScanGoal()
-    goal.topics = ['camera/depth/image_raw', 'camera/rgb/image_raw', 'amcl_pose']
+    goal.topics = ['/camera/depth/image_raw', '/camera/rgb/image_raw', '/amcl_pose', '/people_tracker_measurements', 
+          '/audio' ]
     # goal.topics = ['odom', 'clock']  # available in gazebo
-    # goal.bagfile = './test.bag'
+    goal.bagfile_name_prefix = 'first_tests'
     goal.num_stops = 8
-    goal.stop_time = 3.0  # sec
+    goal.duration = 3.0  # sec
     goal.return_to_original = True
+    goal.poi_scan_upload_url: 'https://turtlecloud.eecs.tufts.edu/api/v1.0/rosbags/'
+    goal.upload_token = '' # DO NOT GIT COMMIT, EDIT ON TURTLEBOT ITSELF
 
     client.send_goal(goal)
     client.wait_for_result()
