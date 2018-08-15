@@ -91,7 +91,7 @@ def main():
     # before doing the poi_scan_server procedure in the scan() function.
 
     # The initialize() function just drives to the specified location
-    initialize()
+    # initialize()
 
     # The scan() function is how we actually do the scan.
     scan()
