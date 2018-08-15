@@ -67,7 +67,7 @@ def scan():
     goal = PoiScanGoal()
     goal.topics = ['camera/depth/image_raw', 'camera/rgb/image_raw', 'amcl_pose']
     # goal.topics = ['odom', 'clock']  # available in gazebo
-    goal.bagfile = '/home/turtlebot/poi_scan_client.bag'
+    goal.bagfile = './test.bag'
     goal.num_stops = 8
     goal.stop_time = 3.0  # sec
     goal.return_to_original = True
