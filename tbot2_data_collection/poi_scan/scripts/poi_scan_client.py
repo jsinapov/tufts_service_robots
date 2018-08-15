@@ -72,7 +72,7 @@ def scan():
     goal.num_stops = 8
     goal.duration = 3.0  # sec
     goal.return_to_original = True
-    goal.poi_scan_upload_url = 'https://turtlecloud.eecs.tufts.edu/api/v1.0/rosbags/'
+    goal.upload_url = 'https://turtlecloud.eecs.tufts.edu/api/v1.0/rosbags/'
     goal.upload_token = '' # DO NOT GIT COMMIT, EDIT ON TURTLEBOT ITSELF
 
     client.send_goal(goal)
