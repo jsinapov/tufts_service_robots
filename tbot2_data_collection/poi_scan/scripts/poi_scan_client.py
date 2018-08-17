@@ -71,9 +71,11 @@ def scan():
     goal.bagfile_name_prefix = 'first_tests'
     goal.num_stops = 8
     goal.duration = 3.0  # sec
+    goal.tune_rotation = 1.33
     goal.return_to_original = True
     goal.upload_url = 'https://turtlecloud.eecs.tufts.edu/api/v1.0/rosbags/'
     goal.upload_token = '' # DO NOT GIT COMMIT, EDIT ON TURTLEBOT ITSELF
+    goal.rm_after_upload = True
 
     client.send_goal(goal)
     client.wait_for_result()
