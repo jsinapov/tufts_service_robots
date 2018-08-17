@@ -74,8 +74,7 @@ def scan():
     goal.tune_rotation = 1.33
     goal.return_to_original = True
     goal.upload_url = 'https://turtlecloud.eecs.tufts.edu/api/v1.0/rosbags/'
-    goal.upload_token = '' # DO NOT GIT COMMIT, EDIT ON TURTLEBOT ITSELF
-    goal.rm_after_upload = True
+    goal.upload_token = '' # DO NOT GIT COMMIT, EDIT ON TURTLEBOT ITSELf
 
     client.send_goal(goal)
     client.wait_for_result()
