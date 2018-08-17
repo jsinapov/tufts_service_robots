@@ -11,7 +11,7 @@ start_point: hall2_adjacent_men_restroom
 # topics: ['/camera/depth/image_raw', '/usb_cam/image_raw', '/amcl_pose']   # usb_cam for logitech external camera
 # note to add: point cloud (look up depth_registered), scan topic (laser scan), add costmap topic 
 topics: ['/camera/depth/image_raw', '/camera/rgb/image_raw', '/amcl_pose', '/people_tracker_measurements', 
-          '/audio', '/pcl_ros' ]
+          '/audio', '/pcl_ros','/scan' ]
 # topics = ['/odom', '/clock']  # available in gazebo
 
 # directory will be created if it does not exist
