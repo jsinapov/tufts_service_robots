@@ -66,7 +66,7 @@ def scan():
 
     goal = PoiScanGoal()
     goal.topics = ['/camera/depth/image_raw', '/camera/rgb/image_raw', '/amcl_pose', '/people_tracker_measurements', 
-          '/audio', 'pcl_ros' ]
+          '/audio', '/pcl_ros', '/scan' ]
     # goal.topics = ['odom', 'clock']  # available in gazebo
     goal.bagfile_name_prefix = 'topic_tests'
     goal.num_stops = 8
