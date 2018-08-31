@@ -1,4 +1,6 @@
-Repository containing packages for the Tufts Service Robotics project
+Repository containing packages for the Tufts Service Robotics project, with rplidar support.
+
+WARNING: Do not use this branch on a robot without an rplidar, it will not work.
 
 ## Installation
 
@@ -12,12 +14,12 @@ $ cd ~/catkin_ws/src
 $ git clone https://github.com/jsinapov/tufts_service_robots.git
 ```
 
-Next, install all dependencies:
+Next, install basic dependencies:
 ```
 $ cd ~/catkin_ws
 $ rosdep install --from-paths src --ignore-src --rosdistro $ROS_DISTRO -y
-$ git clone https://github.com/Slamtec/rplidar_ros.git
 ```
+Setup guide for the rplidar can be found here: https://github.com/jsinapov/tufts_service_robots/wiki/RPLidar-setup
 
 Then, build everything:
 ```
