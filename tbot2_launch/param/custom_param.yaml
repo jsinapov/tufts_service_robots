@@ -1,0 +1,8 @@
+# Customize parameters for move_base 
+
+# Increase radius
+robot_radius: 0.25  # distance a circular robot should be clear of the obstacle
+
+# Decrease max velocity
+DWAPlannerROS:
+    max_vel_x: 0.2 
