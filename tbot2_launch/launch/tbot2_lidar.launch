@@ -1,0 +1,29 @@
+<launch>
+
+	<!-- launch minimal -->
+	<include file="$(find turtlebot_bringup)/launch/minimal.launch">
+		<!-- any potential arguments go here; need to check if 3D goes on by default or not -->	
+	</include>
+
+
+	<!-- launch 3D sensor -->
+	<include file="$(find tbot2_launch)/launch/3dsensor.launch">
+		<arg name="scan_topic" default="scan2"/>
+	</include>
+	
+	<!-- launch lidar sensor and tf-->
+	<node name="lidar_tf_broadcaster" pkg="tbot2_sensors" type="rplidar_frame_broadcaster"/>
+	<include file="$(find tbot2_sensors)/launch/rplidar.launch">
+	</include>
+
+	<!-- launch sound_play so the robot can speak -->
+	<node name="soundplay_node" pkg="sound_play" type="soundplay_node.py"/>
+	
+	<!-- launch filters -->
+	<!-- <include file="$(find tbot2_filters)/launch/tbot2_filters.launch"/> -->
+
+	<!-- launch logging -->
+	<include file="$(find tbot2_launch)/launch/logging.launch">
+	</include>
+	
+</launch>
