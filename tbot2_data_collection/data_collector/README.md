@@ -10,7 +10,7 @@ Please note: Once in a while, the turtlebot might get lost or stuck, so you migh
 
 In first terminal:
 
-    roslaunch turtlebot_bringup minimal.launch
+    roslaunch tbot2_launch tbot2_lidar.launch
 
 In second terminal:
 
