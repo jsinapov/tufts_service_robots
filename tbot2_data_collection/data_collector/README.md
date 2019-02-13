@@ -14,7 +14,7 @@ In first terminal:
 
 In second terminal:
 
-    roslaunch turtlebot_navigation amcl_demo.launch map_file:=`rospack find tufts_halligan`/maps/real/2/2.yaml
+    roslaunch turtlebot_navigation amcl_demo.launch map_file:=~/catkin_ws/src/tufts_service_robots/tufts_halligan/maps/real/2/2.yaml
 
 If using the usb_cam:
 
