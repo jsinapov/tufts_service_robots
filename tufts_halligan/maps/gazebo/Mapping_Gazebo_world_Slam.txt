@@ -1,0 +1,24 @@
+﻿Using SLAM  to create a map from an existing gazebo world:
+
+The following instructions will use a rough gazebo world file of 574 Boston Ave 3rd floor lab sections: 
+
+Obtain the gazebo 574_3rd_floor_labs.world file from the tufts_service_robots github and place the file in a known location or just clone the entire repository in your ~/catkin_ws/src/.
+
+Launch the Gazebo simulation with the Turtlebot and update the world_file argument:
+$ roslaunch turtlebot_gazebo turtlebot_world.launch world_file:=<full path to the world file>
+
+For example my command line would read:
+$ roslaunch turtlebot_gazebo turtlebot_world.launch  world_file:=/home/drevinci/catkin_ws/src/turtlebot_simulator/turtlebot_gazebo/worlds/574_3rd_floor_labs_furnished.world
+
+Begin the steps to run the SLAM programs:
+$ roslaunch turtlebot_gazebo gmapping_demo.launch 
+
+Launch Rviz and the Turtlebot teleop control
+$ roslaunch turtlebot_rviz_launchers view_teleop_navigation.launch
+
+Dont forget to save your map before you close the Rviz window.
+$ rosrun map_server map_saver -f </path file_name>
+
+
+***Recommended to populate the gazebo world with some features such as large boxes, cabinets, and barriers when using SLAM. You can add objects into the world found in the Insert tab in gazebo.
+Once you completed your map you can use photo editing software such GIMP to remove the obstacles.
