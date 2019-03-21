@@ -19,6 +19,16 @@
     wrist_3_lower_limit="${-pi}" wrist_3_upper_limit="${pi}"
   />
 
+  <!-- arm 2 -->
+  <xacro:ur5_robot prefix="2_" joint_limited="true"
+    shoulder_pan_lower_limit="${-pi}" shoulder_pan_upper_limit="${pi}"
+    shoulder_lift_lower_limit="${-pi}" shoulder_lift_upper_limit="${pi}"
+    elbow_joint_lower_limit="${-pi}" elbow_joint_upper_limit="${pi}"
+    wrist_1_lower_limit="${-pi}" wrist_1_upper_limit="${pi}"
+    wrist_2_lower_limit="${-pi}" wrist_2_upper_limit="${pi}"
+    wrist_3_lower_limit="${-pi}" wrist_3_upper_limit="${pi}"
+  />
+
   <link name="world"/>
 
   <link name="ur5_frame">
@@ -36,10 +46,16 @@
     <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
   </joint>
 
-  <joint name="world_joint" type="fixed">
+  <joint name="world_joint_1" type="fixed">
     <parent link="ur5_frame" />
     <child link = "base_link" />
     <origin xyz="0.607 0.635 1.27" rpy="${0*pi/180} ${135*pi/180}  ${0*pi/180}" />
+  </joint>
+
+  <joint name="world_joint_2" type="fixed">
+    <parent link="ur5_frame" />
+    <child link = "2_base_link" />
+    <!-- <origin xyz="0.607 0.635 1.27" rpy="${0*pi/180} ${135*pi/180}  ${0*pi/180}" /> -->
   </joint>
 
 
