@@ -9,6 +9,12 @@
   <!-- ur5 -->
   <xacro:include filename="$(find ur_description)/urdf/ur5.urdf.xacro" />
 
+  <!-- robotiq -->
+  <!-- robotiq 140 -->
+  <!-- <xacro:include filename="$(find robotiq_arg2f_model_visualization)/urdf/robotiq_arg2f_140_model_macro.xacro" /> -->
+  <!-- robotiq 85 -->
+  <xacro:include filename="$(find robotiq_85_description)/urdf/robotiq_85_gripper.urdf.xacro" />
+
   <!-- arm -->
   <xacro:ur5_robot prefix="" joint_limited="true"
     shoulder_pan_lower_limit="${-pi}" shoulder_pan_upper_limit="${pi}"
@@ -55,8 +61,26 @@
   <joint name="world_joint_2" type="fixed">
     <parent link="ur5_frame" />
     <child link = "2_base_link" />
-    <!-- <origin xyz="0.607 0.635 1.27" rpy="${0*pi/180} ${135*pi/180}  ${0*pi/180}" /> -->
+    <origin xyz="0.28 0.69 1.27" rpy="${0*pi/180} ${225*pi/180}  ${0*pi/180}" />
   </joint>
+
+  <!-- robotiq 140 -->
+  <!-- <xacro:robotiq_arg2f_140 prefix="" parent="ee_link" >
+    <origin xyz="0 0 0" rpy="0 ${pi/2} 0"/>
+  </xacro:robotiq_arg2f_140>
+
+  <xacro:robotiq_arg2f_140 prefix="2_" parent="2_ee_link" >
+    <origin xyz="0 0 0" rpy="0 ${pi/2} 0"/>
+  </xacro:robotiq_arg2f_140> -->
+
+  <!-- robotiq 85 -->
+  <xacro:robotiq_85_gripper prefix="" parent="ee_link" >
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:robotiq_85_gripper>
+
+  <xacro:robotiq_85_gripper prefix="2_" parent="2_ee_link" >
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:robotiq_85_gripper>
 
 
 </robot>
