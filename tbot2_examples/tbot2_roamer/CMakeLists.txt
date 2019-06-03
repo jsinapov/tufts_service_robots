@@ -139,6 +139,13 @@ include_directories(
 add_executable(roamer_demo src/roamer_demo.cpp)
 add_dependencies(roamer_demo  ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(roamer_demo ${catkin_LIBRARIES})
+
+add_executable(click_back_and_forth src/click_back_and_forth.cpp)
+add_dependencies(click_back_and_forth  ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(click_back_and_forth ${catkin_LIBRARIES})
+
+
+
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(move_base_client_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
