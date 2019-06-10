@@ -14,7 +14,7 @@ In first terminal:
 
 In second terminal:
 
-    roslaunch tbot2_launch tbot2_lidar.launch
+    roslaunch tbot2_launch amcl_navigation.launch
 
 If using the usb_cam:
 
