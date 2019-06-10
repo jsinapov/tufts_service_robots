@@ -1,4 +1,4 @@
-#### data_collector
+#### Data Collection
 
 Autonomously navigates an existing map, following predefined waypoints, stopping every so often to collect data by spinning around and recording a rosbag with a list of topics.
 
@@ -14,7 +14,7 @@ In first terminal:
 
 In second terminal:
 
-    roslaunch turtlebot_navigation amcl_demo.launch map_file:=~/catkin_ws/src/tufts_service_robots/tufts_halligan/maps/real/2/2.yaml
+    roslaunch tbot2_launch tbot2_lidar.launch
 
 If using the usb_cam:
 
