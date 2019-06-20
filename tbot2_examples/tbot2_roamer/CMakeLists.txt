@@ -144,7 +144,9 @@ add_executable(click_back_and_forth src/click_back_and_forth.cpp)
 add_dependencies(click_back_and_forth  ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(click_back_and_forth ${catkin_LIBRARIES})
 
-
+add_executable(move_k_points src/move_k_points.cpp)
+add_dependencies(move_k_points  ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(move_k_points ${catkin_LIBRARIES})
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
