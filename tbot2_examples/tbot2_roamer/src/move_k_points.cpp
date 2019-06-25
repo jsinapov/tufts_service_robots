@@ -9,6 +9,8 @@
 #include "geometry_msgs/PoseWithCovarianceStamped.h"
 #include "geometry_msgs/PointStamped.h"
 
+#include "std_srvs/Empty.h"
+
 // Function declarations 
 void update_endpoints(const geometry_msgs::PointStamped::ConstPtr& msg); 
 void move_turtlebot(double x, double y, double yaw); 
@@ -39,6 +41,8 @@ int main(int argc, char **argv)
 	ros::spin();
 }
 
+// checks to see if all points have been satisfied through publish point
+// will start patrol once all points have been collected
 void update_endpoints(const geometry_msgs::PointStamped::ConstPtr& msg)
 {
 	if (seq_counter >= 0 && seq_counter < num_locations - 1) {
@@ -59,13 +63,18 @@ void callback(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& msg)
 {
 	int goal_index = 0;
 
+        // prompts user to publish point if not all points have been collected
 	if (locations_x.size() < num_locations) {
 		ROS_INFO("Please use R-Viz to 'Publish' the specified number of points\n");
 		return;
 	}
 
+        // loops through vector
 	while (ros::ok()) {
 		move_turtlebot(locations_x[goal_index], locations_y[goal_index], 0.0);
+
+                std_srvs::Empty emptymsg;
+                ros::service::call("/move_base/clear_costmaps", emptymsg);
 
 		goal_index++;
 
@@ -75,6 +84,7 @@ void callback(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& msg)
 	}
 }
 
+// will move turtlebot to specified point
 void move_turtlebot(double x, double y, double yaw)
 {
 	actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> ac("move_base", true);
